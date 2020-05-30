@@ -1,22 +1,4 @@
-# Getting Started with Tensorflow 2
-## Week 1
 
-### <u> Why Tensorflow </u>
-- Famous
-- Backed by active community
-- Can make any Neural Network
-- A lot of researchers use it
-- Automates a lot of work
-
-### <u> Whats new in Tensorflow 2</u>
-- Eager Execution by Default
-- tensorflow.keras as default high level API
-- API cleanup
-- Easy to use
----
-Tensorflow 1 was meant for researchers only, Tensorflow 2 is for general software developers.
-
-----
 ### Introduction to Google Collab
 <b> Why Google Collab?</b>
 - Provides Browser based Jupyter Notebook
