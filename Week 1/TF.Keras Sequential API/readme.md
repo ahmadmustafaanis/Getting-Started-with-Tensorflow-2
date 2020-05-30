@@ -92,3 +92,22 @@ Non-trainable params: 0
 _________________________________________________________________
 None
 ```
+
+We can add Padding, & Strides in our Conv2D layer.
+
+```python3
+model = Sequential([
+    Conv2D(16,(3,3),strides = (2,2) ,padding='same', input_shape=(28,28,1)),
+    MaxPooling2D((3,3))
+])
+```
+Here we have `same` padding and strides of 2 by 2.
+
+We can change shape of input from (x,y,no.of channels) to (no.ofchannels, x, y) by simply adding data_format in MaxPool2D and Conv2D.
+
+```python3
+model = Sequential([
+    Conv2D(16,(3,3),padding='same', input_shape=(1,28,28),data_format='channels_first'),
+    MaxPooling2D((3,3), data_format='channels_first')
+])
+```
