@@ -44,3 +44,51 @@ We can also use model.add to add layers instead of passing them when creating as
 model = Sequential()
 model.add(Dense(64,activation = 'relu', input_shape=(784,)))
 model.add(Dense(10,activation = 'softmax'))
+```
+
+### Convolutinal Layers with tf.keras
+- There are 2 main things in CNN
+    - Pooling Layers
+    - Convolutional Layers
+
+- Lets see a coding example
+
+```python3
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense,Conv2D, MaxPool2D
+
+model = Sequential()
+model.add(Conv2D(16, kernel_size=3, activation = 'relu', input_shape=(32,32,3)))
+model.add(MaxPool2D((3,3)))
+model.add(Flatten())
+model.add(Dense(64,activation='relu'))
+model.add(Dense(10,activation='softmax'))
+```
+
+To see the details of the models, use `model.summary()`.
+
+
+```python3
+print(model.summary())
+```
+
+```Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              (None, 30, 30, 16)        448       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 10, 10, 16)        0         
+_________________________________________________________________
+flatten (Flatten)            (None, 1600)              0         
+_________________________________________________________________
+dense (Dense)                (None, 64)                102464    
+_________________________________________________________________
+dense_1 (Dense)              (None, 10)                650       
+=================================================================
+Total params: 103,562
+Trainable params: 103,562
+Non-trainable params: 0
+_________________________________________________________________
+None
+```
