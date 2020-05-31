@@ -115,3 +115,46 @@ model = Sequential([
 
 ### Custom Initialziation of Weights and Biases.
 Yes it is possible to initializae custom weights and Biases in Tensorflow with ease. Refer to [this](TF%20Keras%20Week%201%20Tutorial.ipynb) notebook.
+
+----
+### Compiling of Model
+When we hace structure of a model ready, we can call compile method on model to assosiate it with Loss functions, Optimizer, Metrics etc.
+
+```python3
+model = Sequential([
+    Dense(64,activation='relu', input_shape = (32,)),
+    Dense(1, activation = 'sigmoid')
+])
+
+model.compile(
+    loss='sgd', #sthocastic gradient descent
+    optimizer = 'adam',
+    metrics=['accuracy','mse'] #mse=mean squared error
+)
+```
+Now there is another better way to do this, which is instead of passing things as a string like 'adam', we use thier objects given by tf.keras. It allows us to add more options. 
+```python3
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+
+model = Sequential([
+    Dense(64,activation='relu', input_shape = (32,)),
+    Dense(1, activation = 'sigmoid')
+])
+
+model.compile(
+    optimizer=tf.keras.optimizers.SGD(),
+    loss=tf.keras.Binary_CrossEntropy(),
+    metrics = [tf.keras.metrics.BinaryAccuaracy(), tf.keras.metrics.MeanAbsoluteError()]
+)
+```
+
+Now Why we use these? Because these objects have thier own several parameters, which we can pass in it.
+i.e
+
+- tf.keras.optimizers.SGD(learning_rate=0.001,momentum=0.9)
+- tf.keras.losses.Binary_CrossEntropy(form_logit=True)
+    - This thing form_logit is used with linear activation function to convert it into sigmoid but is more computationally better then sigmoid.
+
+Simiarly there are several other parameters which you can pass. You can explore them in Documentation.  
