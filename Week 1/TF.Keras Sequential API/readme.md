@@ -111,3 +111,7 @@ model = Sequential([
     MaxPooling2D((3,3), data_format='channels_first')
 ])
 ```
+----
+
+### Custom Initialziation of Weights and Biases.
+Yes it is possible to initializae custom weights and Biases in Tensorflow with ease. Refer to [this](TF%20Keras%20Week%201%20Tutorial.ipynb) notebook.
