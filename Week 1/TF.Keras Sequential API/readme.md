@@ -158,3 +158,65 @@ i.e
     - This thing form_logit is used with linear activation function to convert it into sigmoid but is more computationally better then sigmoid.
 
 Simiarly there are several other parameters which you can pass. You can explore them in Documentation.  
+
+To learn more about Metrics, refer to this notebook [this](Metrics.ipynb)
+
+-----
+
+## Training of Model
+We can train model using fit method in keras. We pass training set and training labels in it. We also specify several hyper parametrs such as Number of Epochs, Batch Size. Lets look at an example.
+```python3
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+
+model = Sequential([
+    Dense(64,activation='relu', input_shape = (32,)),
+    Dense(1, activation = 'sigmoid')
+])
+
+model.compile(
+    optimizer=tf.keras.optimizers.SGD(),
+    loss=tf.keras.Binary_CrossEntropy(),
+    metrics = [tf.keras.metrics.BinaryAccuaracy(), tf.keras.metrics.MeanAbsoluteError()]
+)
+
+history = model.fit(X_train,y_train,epochs=10, batch_size=256)
+```
+
+This will train the model for 10 epochs with a batch size of 256. <br> We store result in History variable which we can use to analyze the performance of model based on metrics and loss.
+
+
+We normally convert history into a dataframe with all the analytics of model. And then visualize them. Lets see.
+```python3
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.DataFrame(history.history)
+plt.plot(df['loss'])
+plt.xlabel('epoch')
+plt.ylabel('loss')
+plt.show()
+#same for other metrics
+```
+
+----
+
+## Evaluation and Prediction
+We can Evaluate model on Test set and predict on new examples. In order to evaluate, you might have guessed, we can use model.evaluate function in keras.
+Lets see an example
+```python3
+loss, test_binary_acc, test_MAE = model.evaluate(X_test,y_test)
+```
+Since we used Loss function, Binary acc, and MAE as loss and metrics respectively, so it returns 3 values. 
+<br>
+For Predictions, we can use model.predict on new image. And use `np.argmax` to predict the label.
+Let's see and example
+```python3
+pred = model.predict(NewImage.png)
+print(labels[np.argmax(pred)])
+```
+Where labels is a list containing all the labels.
+
+-----
+This winds up the tutorial for Tensorflow Keras Sequential API. Now it;s your turn to try it on MNIST and FASHION MNIST data sets.
