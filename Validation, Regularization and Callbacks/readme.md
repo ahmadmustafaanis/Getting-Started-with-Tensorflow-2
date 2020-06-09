@@ -99,3 +99,49 @@ We also added Dropout Layer which randomly drops 50% neurons. It is also known a
 Remember that we are not going to Drop Out randomly while in `model.evaluate()` and in `model.predict()`. It is only used in `model.fit()` phase.
 
 ---
+
+## Batch Normalization
+
+Learn more about Batch Normalization in [this](Batch%20normalisation.ipynb) notebook.
+
+----
+
+## <u> CallBacks </u>
+
+Call backs are certian types of Objects that can monitor loss & metrics at certain points in training and can perform certain actions based on them.
+
+These are Call backs used in training, there are other several types of Callbacks which can monitor different things and can perform actions based on them.
+
+```python3
+from tensorflow.keras.callbacks import Callback
+```
+
+There are 2 ways to use Callbacks in Keras.
+- Callbacks Base class(which we just imported) thorugh which we make our own subclass
+- Built-in Call backs
+
+Let's Create our own baseclass first.
+
+```python3
+from tensorflow.keras.callbacks import Callback
+
+class My_Callback(Callback):
+    #we will rewrite built-in methods
+
+    def on_train_begin(self, logs=None):
+        #do something at start of training
+    
+    def on_train_batch_begin(self, batch, logs=None):
+        # do somethings at start of batch
+
+    def on_epochs_end(self, epochs, log= None):
+        #do something at end of epoch
+
+
+history = model.fit(X_train, y_train, epochs=5, callbacks=[My_Callback()])
+
+```
+
+Here `history` is also an example of callback whose job is to store loss and metrics in dictonary format in it's history attribute i.e it stores loss and metrics in history.history.
+
+For details Refer to Notebook of this week.
