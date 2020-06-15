@@ -144,4 +144,68 @@ history = model.fit(X_train, y_train, epochs=5, callbacks=[My_Callback()])
 
 Here `history` is also an example of callback whose job is to store loss and metrics in dictonary format in it's history attribute i.e it stores loss and metrics in history.history.
 
-For details Refer to Notebook of this week.
+For details on Custom Callbacks, & applications, Refer to [this](Custom%20Callback.ipynb) notebook, where we have implemented Learning Rate Decay with Keras where we reduce Learning Rate as number of Epochs Increases.
+
+## Early Stopping
+
+Early Stopping is an another important thing in model, Let's say we have set number of epochs to 10000 and started the model training but we see that it is not improving but it is instead performing bad, so how to stop it? In order to save the computational resources.
+Here we can use early stopping.
+
+Early Stopping is a Callback that is built into `keras`. Let's Code it and then I will 
+explain it's components step by step. I will not define the structure of my model and I 
+assume that you know the basic structure of Model.
+
+```python
+from tensorflow.keras.callbacks import EarlyStopping
+
+early_stopping = EarlyStopping()
+
+model.compile(optimizer = 'adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+model.fit(X_train, y_train, validation_split=0.01, epochs=100, callbacks=[early_stopping])
+```
+
+Now here we have added `EarlyStopping` in our model which will stop our model based on validation loss `val_loss` by defualt.
+It has an argument of `monitor` on basis of which it stops the training. By defauly
+`monitor` is set to `val_loss` means it evaluates the performance on validation loss. We can change
+it to validation accuracy too.
+ 
+```python
+early_stopping = EarlyStopping(monitor = 'val_accuracy')
+```
+
+Now it will evaluate on basis of accuracy on validation sets.
+
+Another important parameter in early stopping is `patience`. By default `patience` is 0.
+It means that for any epoch, if performance measure based on `monitor` is worse then previous 
+epoch, it will terminate training.
+
+Now normally we do not terminate training based on 1 epoch because it may improve in next epoch
+so we have to increase it's value.
+
+```python
+early_stopping = EarlyStopping(monitor='val_accuracy', patience=5)
+```
+One another parameter which is commonly used is `min_delta` which is by default 0. Let's say your model improves
+by 0.00001 at every epoch which is almost none. But early stopping will count it as an
+improvement because it greater then min_delta. 
+
+So what we do in `min_delta` is that we specify some minimum value and improvement is 
+early stopping will only take into account the `monitor` as improvement if it is greater 
+then early stopping.
+
+```python
+early_stopping = EarlyStopping(monitor='val_accuracy', patience=5, min_delta=0.1)
+```
+In this case if `val_accuracy` increases less then 0.1, it wont be count as improvement.
+
+Last parameter I want to talk about is `mode`. As you might have guessed that it is not necessary
+that value of  `monitor` will always increase, e.g if `monitor` is `val_loss`, it will 
+decrease on each epoch. By default `mode` is `"auto"`, but it can take in `max` and `min` for
+increasing value and decreasing value of monitor respectively.
+
+------
+
+###### <b>You can find all work of this week in [this](Validation_Regularization_CallBacks.ipynb) file. 
+### Now it is your turn to check your skills, open [this]() file and start using these concepts on iris dataset.
+
