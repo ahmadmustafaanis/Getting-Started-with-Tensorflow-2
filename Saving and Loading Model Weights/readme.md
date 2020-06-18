@@ -39,9 +39,12 @@ We will create a dummy model for binary classification to see how to save models
 ```python3
   checkpoint = ModelCheckpoint('my_mode_weights', save_weights_only = True) 
 ```
-*    * Here we are saving in `tensorflow native format`. File name for saving weights is `my_mode_weights`. 
-*    * It will save weights for every epoch, and since we are passing 1 file, so it will over write it. We will check it later how to over come it.
-*    * 3 different files will be created with names as
-*    *    *  checkpoint
-*    *    *  my_mode_weights.data
-*    *    *  my_mode_weights.index 
+  *   Here we are saving in `tensorflow native format`. File name for saving weights is `my_mode_weights`. 
+
+
+  *   It will save weights for every epoch, and since we are passing 1 file, so it will over write it. We will check it later how to over come it.
+*   3 different files will be created with names as
+  
+    *   checkpoint
+    *   my_mode_weights.data
+    * my_mode_weights.index 
