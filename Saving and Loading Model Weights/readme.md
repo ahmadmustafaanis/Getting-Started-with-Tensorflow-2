@@ -21,7 +21,7 @@ You can save your model during training, at every epoch or you can save the mode
 We will use built-in callback known as `ModelCheckpoint` to save our model weights during training.
 
 We will create a dummy model for binary classification to see how to save models.
-* Create Model
+1. <b> Create Model </b>
 ```python3
   from tensorflow.keras.models import Sequential
   from tensorflow.keras.layers import Dense
@@ -34,15 +34,17 @@ We will create a dummy model for binary classification to see how to save models
 
   model.compile(optimizer= 'SGD', loss='binary_crossentropy', metrics=['acc'] )
 ```
-* Create CheckPoint using built-in CallBack.
+2. <b> Create CheckPoint using built-in CallBack and fit model</b>
 
 ```python3
-  checkpoint = ModelCheckpoint('my_mode_weights', save_weights_only = True) 
+  checkpoint = ModelCheckpoint('my_mode_weights', save_weights_only = True)
+  model.fit(X,y, epochs=10, callbacks=[checkpoint]) #pass checkpoint in callback 
 ```
-  *   Here we are saving in `tensorflow native format`. File name for saving weights is `my_mode_weights`. 
+
+*   Here we are saving in `tensorflow native format`. File name for saving weights is `my_mode_weights`. 
 
 
-  *   It will save weights for every epoch, and since we are passing 1 file, so it will over write it. We will check it later how to over come it.
+      *   It will save weights for every epoch, and since we are passing 1 file, so it will over write it. We will check it later how to over come it.
 *   3 different files will be created with names as
   
     *   checkpoint
