@@ -169,4 +169,4 @@ new_model = load_model('my_model')
 new_model_h5 = load_model('model.h5')
 ```
 
-To learn more about it, refer to [this](ProgrammingTutorial.ipynb) notebook under Saving the Entire model.
+To learn more about it, refer to [this](ProgrammingTutorial.ipynb) notebook under Saving the Entire model, and in-depth understanding on this topic is given in [this](Saving%20model%20architecture%20only.ipynb) notebook.
