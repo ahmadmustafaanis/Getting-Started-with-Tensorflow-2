@@ -131,3 +131,42 @@ There are several other important parameters in `ModelCheckpoint` callback that 
 
 You can learn more about it in [this](ProgrammingTutorial.ipynb) programming tutorial under *Model Saving Criteria*
 
+----
+
+## Saving and loading the Entire Model with Architecture
+
+Some times you do not only have to save the weights, but also to save the model architecture, to do this, this is your basic code
+
+```python3
+from tensorflow.keras.callbacks import ModelCheckpoint
+
+checkpoint = ModelCheckpoint('my_model_arch/my_model', save_weights_only=False)
+```
+By default `save_weights_only` is set to `False` so no need to mention it explicitly.
+
+Our folder directory would be
+* my_model_arch/my_model/assets
+* my_model_arch/my_model/saved_model.pb
+* my_model_arch/my_model/variables/variables.data-0000-of-0001
+* my_model_arch/my_model/variables/variables.index
+
+
+We can also save it in `.h5` format by just adding `.h5` in the end of the filepath. In that case only 1 file would be saved.
+
+**Manually Saving the Model**
+
+We can manually save the enitre model and architecture using `model.save('filepath')` or `model.save('filepath.h5')`.
+
+**Loading the Entire Model**
+
+To load the enitre model, we can use `load_model` function which is built-in Keras.
+
+```python3
+from tensorflow.keras.models import load_model
+
+new_model = load_model('my_model')
+
+new_model_h5 = load_model('model.h5')
+```
+
+To learn more about it, refer to [this](ProgrammingTutorial.ipynb) notebook under Saving the Entire model.
