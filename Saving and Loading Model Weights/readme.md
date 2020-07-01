@@ -50,3 +50,84 @@ We will create a dummy model for binary classification to see how to save models
     *   checkpoint
     *   my_mode_weights.data
     * my_mode_weights.index 
+
+* To save it in `hdf5` format, just change the name of file in `ModelCheckpoint` to `.h5` extension. i.e
+
+```python3
+checkpoint = ModelCheckpoint('my_mode_weights.h5', save_weights_only = True)
+model.fit(X,y, epochs=10, callbacks=[checkpoint]) #pass checkpoint in callback 
+```
+* In this case, only one file will be created with name of `my_mode_weights.h5`.
+
+-----
+
+### Saving after training i.e Manual saving
+
+We can save the model, after training, when all the epochs are done and we have the perfect weights, we can save them. We do not have to use the `callback` in this case. We can simply use `model.save_weights` built-in function.
+
+Lets Check Code
+
+```python3
+model = Sequential([
+  #Layers
+  #Layers
+  #Layers
+])
+model.compile(optimizer='adam', loss='mse', metrics=['mae'])
+
+model.fit(X, y, epochs = 100)
+
+model.save_weights('my_model`) #will save weights in Native Tensorflow Format and create 3 files.
+
+model.save_weights('my_model.h5') #will save in hdf5 format
+```
+-----
+
+Saved Files Explaination:
+To see the Explaination of files created by `ModelCheckpoint` Callback, refer to [this](Explanation%20of%20saved%20files.ipynb) notebook.
+
+----
+
+
+## Loading Weights
+
+Since we have not saved the model architecture, We have only saved weights of the model, we have to redesign the model with same architecture.
+
+Taking our first example where we built a binary classifier, I will take same model and rewrite it.
+
+```python3
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.callbacks import ModelCheckpoint
+
+model = Sequential([
+  Dense(10, input_shape=(10,), activation = 'relu'),
+  Dense(1, activation = 'sigmoid')
+])
+
+model.load_weights('my_mode_weights') #Use same file name as you used to store the weights
+
+```
+
+## Saving Criterias
+Here we will learn how to save a model based on specific criteria, let's say we want to save the weights of a model after it see 5k training examples. We can save it using following code,
+
+```python3 
+
+from tensorflow.keras.callbacks import ModelCheckpoint
+
+checkpoint_5k_path = 'model_checkpoint_5k/checkpoint_{epochs:02d}_{batch:04d}
+
+checkpoint_5k = ModelCheckpoint(filepath = checkpoint_path, save_weights_only = True, save_freq = 5000 )
+```
+Notice that we have `{epoch:02d}_{batch:04d}` in our path, so it will not overwrite the weights, instead will make new files for each epcoh and batch.
+
+There are several other important parameters in `ModelCheckpoint` callback that can help you, which are
+
+* `save_best_only` if `True` will only save the best weights based on `monitor` which can be based on your `loss` and `metrics` and validation data if any.
+* `monitor` to be used with `save_best_only`
+* `mode` this can be used with `monitor`, already discussed earlier.
+* `save_freq` this can be set to `epochs` for saving weights at every epoch.
+
+You can learn more about it in [this](ProgrammingTutorial.ipynb) programming tutorial under *Model Saving Criteria*
+
