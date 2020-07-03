@@ -221,3 +221,32 @@ print(f"Your image is of {decoded_pred}")
 
 ```
 You can learn more about it in [this](ProgrammingTutorial.ipynb) under "Loading pre-trained Keras models" section.
+
+-----
+
+## Tensorflow Hub Models
+Tensorflow also provides Tensorflow-hub models, which are basically focused on network modules which you can think of a seperate components of a tensorflow graph.
+
+Tensorflow hub is a seperate library and you need to install it.
+
+```bash
+$ conda activate yourDeepLearningVenve
+$ pip install "tensorflow>=2.0.0"
+$ pip install --upgrade tensorflow-hub
+```
+You can browse all the avaiable models at [tfhub](https://tfhub.dev/)
+To use them, 
+```python3
+import tensorflow_hub as hub
+
+model_url = "https://tfhub.dev/google/imagenet/mobilenet_v1_050_160/classification/4" #learned from documentation
+
+module = Sequential([
+  hub.KerasLayer("model_url")
+])
+
+module.build(input_shape = [None, 160, 160, 3])
+```
+Output of this model is 1001 classes, for which you can find labels at documentation.
+
+To know more about predicting images with it, refer to [this](ProgrammingTutorial.ipynb) notebook under TensorFlow Hub modules.
