@@ -170,3 +170,54 @@ new_model_h5 = load_model('model.h5')
 ```
 
 To learn more about it, refer to [this](ProgrammingTutorial.ipynb) notebook under Saving the Entire model, and in-depth understanding on this topic is given in [this](Saving%20model%20architecture%20only.ipynb) notebook.
+
+## Loading Pre-Trained Keras Models
+
+Keras provide famous deep learning models, thier architectures, and pre-trained weights. First time you load them, they will automatically download weights in ` ~/.keras/models`. Famous available models are
+* Xception
+* VGG16
+* VGG19
+* Resnet/ Resnet v2 
+* Inception v3
+* Inception Resnet v2
+* MobileNet/ MobileNet v2 
+* DenseNet
+* NASnet
+
+To import the model, we import it from `tensorflow.keras.applications`. Let's see the code.
+
+```python3
+from tensorflow.keras.applications.resnet50 import ResNet50
+
+model = ResNet50(weights = 'imagenet' ) #pre-trained weights on imagenet dataset
+```
+
+Let's say we do not want imagenet weights, then we can use
+
+`model = ResNet50(weights='none')`, and then we have to do fresh training.
+
+We can use it for **Transfer Learning** if we exclude the top Dense Layers. We can do it by
+```python3
+model = ResNet50(weights='imagenet', include_top = False)
+```
+#### Prediction using pre-trained ResNet50
+
+```python3
+from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input, decode_predictions
+from tensorflow.keras.preprocessing import image
+import numpy as np
+
+model = ResNet50(weights = 'imagenet', include_top = True)
+
+image_input = image.load_image('path', target_size=(224, 224) )#224 is size for resnet
+image_input = image.img_to_array(image_input)
+image_input = preprocess_input(image_input[np.newaxis, ...])#adding a new axis for batch size
+
+preds = model.predict(image_input)
+
+decoded_pred = deocde_predictions(preds)[0]
+
+print(f"Your image is of {decoded_pred}")
+
+```
+You can learn more about it in [this](ProgrammingTutorial.ipynb) under "Loading pre-trained Keras models" section.
