@@ -14,7 +14,7 @@ Normally it do not matter which format you use, but Tensorflow Native format is 
 
 ----
 
-You can save your model during training, at every epoch or you can save the model weights after you have completed the training and satisfied with the results.
+You can save your model during training, at every epoch or you can save the model weights after you have completed the training and satisfied with the results. 
 
 ### Saving during training
 
