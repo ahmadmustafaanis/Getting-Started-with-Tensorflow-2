@@ -10,3 +10,5 @@
 * [Validation, Regularization, and Callbacks](https://github.com/ahmadmustafaanis/Getting-Started-with-Tensorflow-2/tree/master/Validation%2C%20Regularization%20and%20Callbacks)
 * [Saving and Loading Model Weights](https://github.com/ahmadmustafaanis/Getting-Started-with-Tensorflow-2/tree/master/Saving%20and%20Loading%20Model%20Weights)
 * [Capstone Project](https://github.com/ahmadmustafaanis/Getting-Started-with-Tensorflow-2/tree/master/Capstone%20Project)
+
+All things were learned during the course [Getting Started with Tensorflow 2](https://www.coursera.org/learn/getting-started-with-tensor-flow2). 
