@@ -9,4 +9,4 @@
 * [Tensorflow Keras API Basics](https://github.com/ahmadmustafaanis/Getting-Started-with-Tensorflow-2/tree/master/TF.Keras%20Sequential%20API%20Basics)
 * [Validation, Regularization, and Callbacks](https://github.com/ahmadmustafaanis/Getting-Started-with-Tensorflow-2/tree/master/Validation%2C%20Regularization%20and%20Callbacks)
 * [Saving and Loading Model Weights](https://github.com/ahmadmustafaanis/Getting-Started-with-Tensorflow-2/tree/master/Saving%20and%20Loading%20Model%20Weights)
-* [Capstone Project]()
+* [Capstone Project](https://github.com/ahmadmustafaanis/Getting-Started-with-Tensorflow-2/tree/master/Capstone%20Project)
