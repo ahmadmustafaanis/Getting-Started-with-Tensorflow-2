@@ -86,11 +86,11 @@ model = Sequential([
 
 L1 is computed as 
 
-<img src=0.png></img>
+<img src=0.PNG></img>
 
 and L2 is computed as
 
-<img src=1.png></img>
+<img src=1.PNG></img>
 
 Here we compute L1, L2, and both L1_L2 Regularization using Tf.Keras.
 
