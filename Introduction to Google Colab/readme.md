@@ -19,7 +19,7 @@
 - `Ctrl + M` followed by `Y` for Markdown -> Code
 
 ##### Change Language
-- To make a python 2 notebook go to this link [Python 2 for Collab](bit.ly/colabpy2)
+- To make a python 2 notebook go to this link [Python 2 for Collab](https://colab.research.google.com/notebook#create=true&language=python2)
 
 ##### GPU & TPU
 - Go to `Runtime > Change Runtime Type` and select GPU or TPU from there.
